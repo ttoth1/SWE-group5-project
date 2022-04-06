@@ -143,6 +143,9 @@ def logout():
     logout_user()
     return flask.redirect("login")
 
+@app.route("/user_profile", methods=["POST"])
+def user():
+    return flask.render_template("user_profile.html")
 
 @app.route("/index")
 @login_required
