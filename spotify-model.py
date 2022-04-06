@@ -9,6 +9,7 @@ pd.options.mode.chained_assignment = None
 
 
 def load_spotify_features():
+    """This functions loads the spotify dataset and performs feature selection on the data."""
     # Load Spotify Song data from dataset
     spotify_data = pd.read_csv("data/model-features.csv")
     spotify_data.drop_duplicates(subset=["track_id"])
@@ -67,6 +68,10 @@ def load_spotify_features():
 
 
 def generate_playlist_feature(feature_set: pd.DataFrame, liked_songs: pd.DataFrame):
+    """
+    This function takes in the feature set and liked songs then
+    returns a series representing the features of the liked songs and a df with the features of songs not in the liked songs
+    """
     liked_songs_features = feature_set[
         feature_set["track_id"].isin(liked_songs["track_id"].values)
     ]
@@ -81,9 +86,13 @@ def generate_playlist_feature(feature_set: pd.DataFrame, liked_songs: pd.DataFra
     )
 
 
-def generate_playlist_recos(
+def generate_playlist_recommendations(
     dataset_df: pd.DataFrame, features: pd.Series, nonplaylist_features: pd.DataFrame
 ):
+    """
+    This function takes in the original spotify dataset, the series of liked song features,
+    and the features of the songs that are not liked then returns a single track_id for the suggested track
+    """
     non_playlist_df = dataset_df[
         dataset_df["track_id"].isin(nonplaylist_features["track_id"].values)
     ]
