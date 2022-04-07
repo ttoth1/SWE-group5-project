@@ -67,18 +67,14 @@ def load_spotify_features():
     return spotify_features_df, spotify_data
 
 
-def generate_playlist_feature(feature_set: pd.DataFrame, liked_songs: pd.DataFrame):
+def generate_playlist_feature(feature_set: pd.DataFrame, liked_songs: list):
     """
     This function takes in the feature set and liked songs then
     returns a series representing the features of the liked songs and a df with the features of songs not in the liked songs
     """
-    liked_songs_features = feature_set[
-        feature_set["track_id"].isin(liked_songs["track_id"].values)
-    ]
-    # Find all non-playlist song features
-    not_liked_songs_features = feature_set[
-        ~feature_set["track_id"].isin(liked_songs["track_id"].values)
-    ]
+
+    liked_songs_features = feature_set[feature_set["track_id"].isin(liked_songs)]
+    not_liked_songs_features = feature_set[~feature_set["track_id"].isin(liked_songs)]
     liked_songs_features_final = liked_songs_features.drop(columns="track_id")
     return (
         liked_songs_features_final.sum(axis=0),
