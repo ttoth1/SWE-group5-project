@@ -1,11 +1,11 @@
 from app import app, db
 import random
 import os
-
+import base64
 import flask
 from flask_login import login_user, current_user, LoginManager, logout_user
 from flask_login.utils import login_required
-from models import User, Rating
+from models import Rating, User_Table
 
 from wikipedia import get_wiki_link
 from tmdb import get_movie_data
@@ -31,7 +31,7 @@ app.register_blueprint(bp)
 
 @login_manager.user_loader
 def load_user(user_name):
-    return User.query.get(user_name)
+    return User_Table.query.get(user_name)
 
 
 @app.route("/get_reviews")
@@ -78,16 +78,26 @@ def signup():
 
 @app.route("/signup", methods=["POST"])
 def signup_post():
+    print(flask.request.form.get)
     username = flask.request.form.get("username")
-    user = User.query.filter_by(username=username).first()
+    email = flask.request.form.get("email")
+    firstname =flask.request.form.get("firstname") 
+    lastname  = flask.request.form.get("lastname")
+    password_raw = flask.request.form.get("password")
+    encrypted_password = password_raw.encode('ascii')
+    base64_bytes = base64.b64encode(encrypted_password)
+    password = base64_bytes.decode('ascii')
+    user = User_Table.query.filter_by(username=username).first()
     if user:
-        pass
+        flask.flash("Error: username already exists!")
+        return flask.render_template("signup.html")
     else:
-        user = User(username=username)
+        user = User_Table(username=username, password = password, firstname = firstname, lastname = lastname, email = email)
         db.session.add(user)
         db.session.commit()
+        return flask.redirect(flask.url_for("login"))
 
-    return flask.redirect(flask.url_for("login"))
+    
 
 
 @app.route("/login")
@@ -98,14 +108,19 @@ def login():
 @app.route("/login", methods=["POST"])
 def login_post():
     username = flask.request.form.get("username")
-    user = User.query.filter_by(username=username).first()
+    raw_password = flask.request.form.get("password")
+    encrypted_password = raw_password.encode('ascii')
+    base64_bytes = base64.b64encode(encrypted_password)
+    password = base64_bytes.decode('ascii')
+    user = User_Table.query.filter_by(username=username, password = password ).first()
     if user:
         login_user(user)
         return flask.redirect(flask.url_for("index"))
 
     else:
-        return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
-
+        flask.flash("Error: Incorrect Username or Password!")
+        return flask.render_template("login.html")
+        
 
 MOVIE_IDS = [
     157336,  # actually IDK what this is
@@ -144,8 +159,11 @@ def logout():
     return flask.redirect("login")
 
 @app.route("/user_profile", methods=["POST"])
-def user():
-    return flask.render_template("user_profile.html")
+def user_profle():
+    firstname = current_user.firstname
+    lastname = current_user.lastname
+    email = current_user.email
+    return flask.render_template("user_profile.html", firstname = firstname, lastname = lastname, email = email)
 
 @app.route("/index")
 @login_required

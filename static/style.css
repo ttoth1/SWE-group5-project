@@ -17,12 +17,11 @@ audio {
 }
 
 .container{
-  display:grid ;
-  grid-gap: 10px;
   margin: auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;;
-  box-shadow: 0 4px 8px 0 rgba(247, 245, 244, 0.2)
+  width: 50%;
+  border: 3px springgreen;
+  padding: 10px;
+  
   
 }
 .background{
