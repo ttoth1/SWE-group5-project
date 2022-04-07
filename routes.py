@@ -88,7 +88,6 @@ def signup_post():
     base64_bytes = base64.b64encode(encrypted_password)
     password = base64_bytes.decode('ascii')
     user = User_Table.query.filter_by(username=username).first()
-    print(user)
     if user:
         flask.flash("Error: username already exists!")
         return flask.render_template("signup.html")
@@ -96,7 +95,6 @@ def signup_post():
         user = User_Table(username=username, password = password, firstname = firstname, lastname = lastname, email = email)
         db.session.add(user)
         db.session.commit()
-        print('added')
         return flask.redirect(flask.url_for("login"))
 
     
@@ -115,7 +113,6 @@ def login_post():
     base64_bytes = base64.b64encode(encrypted_password)
     password = base64_bytes.decode('ascii')
     user = User_Table.query.filter_by(username=username, password = password ).first()
-    print(user)
     if user:
         login_user(user)
         return flask.redirect(flask.url_for("index"))
@@ -166,7 +163,6 @@ def user_profle():
     firstname = current_user.firstname
     lastname = current_user.lastname
     email = current_user.email
-    print(firstname)
     return flask.render_template("user_profile.html", firstname = firstname, lastname = lastname, email = email)
 
 @app.route("/index")
