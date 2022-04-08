@@ -1,68 +1,80 @@
-import logo from './logo.svg';
 import './App.css';
-import {useState, useEffect} from 'react';
-import {Review} from './Review.js';
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 function App() {
-  const [val, setVal] = useState([])
-  function handleDelete(i) {
-    setVal([...val.slice(0, i), ...val.slice(i+1)]);
-  }
+  const CLIENT_ID = "c96716b2eba14725b66e4cde692c3d22"
+  const REDIRECT_URI = "https://cherry-pie-58273.herokuapp.com/spotify_login"
+  // const REDIRECT_URI = "http://127.0.0.1:5000/spotify_login"
+  const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
+  const RESPONSE_TYPE = "token"
 
-  function handleRatingChange(i, e) {
-    const newReviews = val.slice();
-    newReviews[i].rating = e.target.value;
-    setVal(newReviews);
-  }
+  const [token, setToken] = useState("")
+  const [searchKey, setSearchKey] = useState("")
+  const [artists, setArtists] = useState([])
 
-  function handleCommentChange(i, e) {
-    const newReviews = val.slice();
-    newReviews[i].comment = e.target.value;
-    setVal(newReviews);
-  }
-
-  function onClickSave() {
-    fetch('/save_reviews', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(val),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }
-
-  const reviews = val.map(
-    (review, i) => <Review 
-      movieID={review.movie_id}
-      rating={review.rating}
-      comment={review.comment}
-      onDelete={() => handleDelete(i)}
-      onEdit={(e) => handleCommentChange(i, e)}
-      onRate={(e) => handleRatingChange(i, e)}
-    />);
-  
   useEffect(() => {
-    fetch('/get_reviews', {
-      method: 'GET',
+    const hash = window.location.hash
+    let token = window.localStorage.getItem("token")
+
+    if (!token && hash) {
+      token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
+
+      window.location.hash = ""
+      window.localStorage.setItem("token", token)
+    }
+    setToken(token)
+
+  }, [])
+
+  const logout = () => {
+    setToken("")
+    window.localStorage.removeItem("token")
+  }
+
+  const searchArtists = async (e) => {
+    e.preventDefault()
+    const {data} = await axios.get("https://api.spotify.com/v1/search", {
       headers: {
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      params:{
+        q: searchKey,
+        type: "artist"
       }
     })
-      .then((response) => response.json())
-      .then((data) => {
-        setVal(data);
-      });
-  }, []);
+    setArtists(data.artists.items)
+    console.log("searchArtists() called");
+  }
+
+  const renderArtists = () => {
+    console.log("renderArtists() called");
+    return artists.map(artist => (
+      <div key={artist.id}>
+        {artist.images.length ? <img width={"100%"} src={artist.images[0].url} alt=""/> : <div>No Image</div>}
+        {artist.name}
+      </div>
+    ))
+  }
 
   return (
     <div className="App">
-      <h1>Your reviews:</h1>
-      {reviews}
-      <button onClick={onClickSave}>Save Changes</button>
+      <header className="App-header">
+        <h1>Spotify React</h1>
+        {!token ?
+          <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login to Spotify</a>
+          : <button onClick={logout}>Logout</button>}
+
+        {token ?
+          <form onSubmit={searchArtists}>
+            <input type="text" onChange={e => setSearchKey(e.target.value)}/>
+            <button type={"submit"}>Artist search</button>
+          </form>
+          : <h2>Please login</h2>
+        }
+
+        {renderArtists()}
+      </header>
     </div>
   );
 }

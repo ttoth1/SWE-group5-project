@@ -28,8 +28,8 @@ bp = flask.Blueprint(
 )
 
 
-@bp.route("/new_page")
-def new_page():
+@bp.route("/spotify_login")
+def spotify_login():
     return flask.render_template("index.html")
 
 
