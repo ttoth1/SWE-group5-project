@@ -6,4 +6,4 @@ Flask-SQLAlchemy
 psycopg2-binary
 flask
 pandas
-sklearn
+scikit-learn
