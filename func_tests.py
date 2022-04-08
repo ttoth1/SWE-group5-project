@@ -1,10 +1,16 @@
 import unittest
 from flask import url_for, request
 import app
+from functions import encrypt_password
 
-test_client = app.app.test_client()
 
-with test_client:
-    response = test_client.get(url_for('user_profile') )
-    assert request.path == url_for('userprofile.html')
-    pass
+class testPasswordEncryption(unittest.TestCase):
+    def test_password_password(self):
+        test_password = 'password'
+        expected_output = 'cGFzc3dvcmQ='
+        actual_output = encrypt_password(test_password)
+        self.assertEqual(expected_output,actual_output)
+        pass
+        
+if __name__ == "__main__":
+    unittest.main()
