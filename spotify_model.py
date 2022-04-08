@@ -70,7 +70,8 @@ def load_spotify_features():
 def generate_playlist_feature(feature_set: pd.DataFrame, liked_songs: list):
     """
     This function takes in the feature set and liked songs then
-    returns a series representing the features of the liked songs and a df with the features of songs not in the liked songs
+    returns a series representing the features of the liked songs
+    and a df with the features of songs not in the liked songs
     """
 
     liked_songs_features = feature_set[feature_set["track_id"].isin(liked_songs)]
@@ -87,7 +88,8 @@ def generate_playlist_recommendations(
 ):
     """
     This function takes in the original spotify dataset, the series of liked song features,
-    and the features of the songs that are not liked then returns a single track_id for the suggested track
+    and the features of the songs that are not liked
+    then returns a single track_id for the suggested track
     """
     non_playlist_df = dataset_df[
         dataset_df["track_id"].isin(nonplaylist_features["track_id"].values)
