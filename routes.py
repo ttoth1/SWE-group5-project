@@ -9,7 +9,7 @@ from flask_login import login_user, current_user, LoginManager, logout_user
 from flask_login.utils import login_required
 from models import Liked_Songs, User_Table
 from app import app, db
-
+from functions import encrypt_password
 from spotify_model import (
     load_spotify_features,
     generate_playlist_feature,
@@ -54,10 +54,8 @@ def signup_post():
     email = flask.request.form.get("email")
     firstname = flask.request.form.get("firstname")
     lastname = flask.request.form.get("lastname")
-    password_raw = flask.request.form.get("password")
-    encrypted_password = password_raw.encode("ascii")
-    base64_bytes = base64.b64encode(encrypted_password)
-    password = base64_bytes.decode("ascii")
+    raw_password = flask.request.form.get("password")
+    password = encrypt_password(raw_password=raw_password)
     user = User_Table.query.filter_by(username=username).first()
     if user:
         flask.flash("Error: username already exists!")
@@ -83,9 +81,7 @@ def login():
 def login_post():
     username = flask.request.form.get("username")
     raw_password = flask.request.form.get("password")
-    encrypted_password = raw_password.encode("ascii")
-    base64_bytes = base64.b64encode(encrypted_password)
-    password = base64_bytes.decode("ascii")
+    password = encrypt_password(raw_password=raw_password)
     user = User_Table.query.filter_by(username=username, password=password).first()
     if user:
         login_user(user)
