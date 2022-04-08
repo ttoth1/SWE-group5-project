@@ -140,11 +140,11 @@ MOVIE_IDS = [
 
 @app.route("/add_liked_song")
 def add_liked_song():
-    # song = flask.session.get("track_id")
-    song = "fdsiuhfws87efy87"
+    song = flask.session.get("track_id")
     new_liked_song = Liked_Songs(username=current_user.username, track_id=song)
     db.session.add(new_liked_song)
     db.session.commit()
+    return flask.redirect("/index")
 
 
 @app.route("/rate", methods=["POST"])
@@ -189,16 +189,28 @@ def user_profle():
     )
 
 
+# spotify_features_df, spotify_data = load_spotify_features()
 @app.route("/index")
 @login_required
 def index():
     movie_id = random.choice(MOVIE_IDS)
 
+    liked_song_list = []
+    liked_song_query = Liked_Songs.query.filter_by(username=current_user.username).all()
+    for track_id in liked_song_query:
+        liked_song_list.append(track_id)
+    liked_songs_vector, not_liked_songs_features = generate_playlist_feature(
+        spotify_features_df, liked_song_list
+    )
+    flask.session["track_id"] = generate_playlist_recommendations(
+        spotify_data, liked_songs_vector, not_liked_songs_features
+    )
+
     # API calls
     (title, tagline, genre, poster_image) = get_movie_data(movie_id)
     wikipedia_url = get_wiki_link(title)
 
-    ratings = Rating.query.filter_by(movie_id=movie_id).all()
+    # ratings = Rating.query.filter_by(movie_id=movie_id).all()
 
     return flask.render_template(
         "main.html",
@@ -207,8 +219,9 @@ def index():
         genre=genre,
         poster_image=poster_image,
         wiki_url=wikipedia_url,
-        ratings=ratings,
+        # ratings=ratings,
         movie_id=movie_id,
+        track_id=flask.session.get("track_id"),
     )
 
 
