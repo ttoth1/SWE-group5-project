@@ -8,3 +8,8 @@ with test_client:
     response = test_client.get(url_for('user_profile') )
     assert request.path == url_for('userprofile.html')
     pass
+
+class testPasswordEncryption(unittest.TestCase):
+    def test_password_password(self):
+        
+        
