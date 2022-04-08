@@ -1,6 +1,6 @@
 import unittest
 from flask import url_for, request
-import app
+from app import app
 from functions import encrypt_password
 
 
