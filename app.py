@@ -1,5 +1,6 @@
-import flask
+"""This file sets up the flask app and SQLAlchemy database for use in routes.py and models.py"""
 import os
+import flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import find_dotenv, load_dotenv
 
