@@ -94,11 +94,6 @@ def signup_post():
     lastname = flask.request.form.get("lastname")
     raw_password = flask.request.form.get("password")
     password = encrypt_password(raw_password=raw_password)
-    '''
-    encrypted_password = password_raw.encode("ascii")
-    base64_bytes = base64.b64encode(encrypted_password)
-    password = base64_bytes.decode("ascii")
-    '''
     user = User_Table.query.filter_by(username=username).first()
     if user:
         flask.flash("Error: username already exists!")
@@ -125,11 +120,6 @@ def login():
 def login_post():
     username = flask.request.form.get("username")
     raw_password = flask.request.form.get("password")
-    '''
-    encrypted_password = raw_password.encode("ascii")
-    base64_bytes = base64.b64encode(encrypted_password)
-    password = base64_bytes.decode("ascii")
-    '''
     password = encrypt_password(raw_password=raw_password)
     user = User_Table.query.filter_by(username=username, password=password).first()
     if user:
