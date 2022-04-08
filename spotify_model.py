@@ -1,5 +1,9 @@
 # pylint: disable=anomalous-backslash-in-string,E1101
 
+"""
+This file loads the spotify dataset and finds a recommended song based on
+a user's list of liked songs
+"""
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
