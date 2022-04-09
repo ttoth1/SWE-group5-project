@@ -6,49 +6,29 @@
 
 <body>
 	<a href="/logout">Log out</a>
+	<br>
 	<form method="POST" action="/user_profile">
 		<button name="User Profile">See my Profile!</button>
-		<br>
-		<a href="/spotify_login">Login with Spotify!</a>
 	</form>
-	<h1>Movie Explorer</h1>
-	<h1>Track ID: {{track_id}}</h1>
-	<h2>{{title}}</h2>
-	<h3>{{tagline}}</h3>
-	<p>Genres: {{genre}}</p>
+	<a href="/spotify_login">Login with Spotify!</a>
+	<h1>Music Recommendations</h1>
+	<h1>Song:
+		<a href="{{track_link}}">{{track_name}}</a>
+	</h1>
+	<h2>Artist:
+		<a href="{{artist_link}}">{{artist}}</a>
+	</h2>
+	<h3>Album:
+		<a href="{{album_link}}">{{album}}</a>		
+	</h3>
 	<div>
-		<img src="{{poster_image}}" width=500 height=700 />
+		<img src="{{album_pic}}"/>
 	</div>
-	<a href="{{wiki_url}}"> Click here to see Wikipedia page! </a>
+	<br>
 	<div>
 		<form method="GET" action="{{url_for('add_liked_song')}}">
 			<button> Like This Song! </button>
 		</form>
-	</div>
-	<div class="feedback">
-		<form method="POST" action="/rate">
-			<p>
-				<label for="movie_id">Movie ID</label>
-				<input id="movie_id" type="text" name="movie_id" value={{movie_id}} readonly="readonly" />
-				<label for="rating">Rating (out of 5)</label>
-				<input id="rating" type="number" name="rating" min="1" max="5" />
-			</p>
-			<p>
-				<textarea id="comment" name="comment" placeholder="Leave a comment"></textarea>
-			</p>
-			<p>
-				<input type="submit" value="Submit" />
-			</p>
-		</form>
-
-		<h2>See what other people said!</h2>
-		{% for rating in ratings %}
-		<div>
-			<h3>User: {{rating.username}}</h3>
-			<b>Rating: {{rating.rating}}/5</b>
-			<p>{{rating.comment}}</p>
-		</div>
-		{% endfor %}
 	</div>
 </body>
 

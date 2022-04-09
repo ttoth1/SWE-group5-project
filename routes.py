@@ -15,6 +15,7 @@ from spotify_model import (
     generate_playlist_feature,
     generate_playlist_recommendations,
 )
+from get_track_info import get_track_info
 
 spotify_features_df, spotify_data = load_spotify_features()
 
@@ -136,10 +137,20 @@ def index():
     flask.session["track_id"] = generate_playlist_recommendations(
         spotify_data, liked_songs_vector, not_liked_songs_features
     )
+    current_track = flask.session.get("track_id")
+    track_info = get_track_info(current_track)
+    track_name, track_link, artist, artist_link, album, album_link, album_pic = track_info
 
     return flask.render_template(
         "main.html",
         track_id=flask.session.get("track_id"),
+        track_name = track_name,
+        track_link = track_link,
+        artist = artist,
+        artist_link = artist_link,
+        album = album,
+        album_link = album_link,
+        album_pic = album_pic,
     )
 
 
