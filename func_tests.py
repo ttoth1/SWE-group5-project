@@ -1,13 +1,8 @@
-from json import load
-from pickle import TRUE
 import unittest
 from flask import url_for, request
-import models
-import routes
 from functions import encrypt_password
 from app import app
 import requests
-from models import User_Table, Liked_Songs
 from spotify_model import load_spotify_features
 
 class testPasswordEncryption(unittest.TestCase):
