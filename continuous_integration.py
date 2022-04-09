@@ -1,7 +1,6 @@
 import unittest
 from flask import url_for, request
 from functions import encrypt_password
-from app import app
 from spotify_model import load_spotify_features
 
 class testPasswordEncryption(unittest.TestCase):
