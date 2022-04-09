@@ -1,4 +1,5 @@
-Interactive Web Page that interacts with the TMDB and Wikipedia APIs allowing user to view details on a some randomly selected movies or details on any movie by searching for it. Enjoy!
+Interactive Web Page that is essentially a music app that is accessible from the browser. The music app will provide a social login to allow users to easily identify themselves, and allow users to scroll through songs and find music they like in a more simplified, streamlined process. The simpler UI will eliminate some of the hassle of searching for songs, by using a machine learning model to predict songs that app users will enjoy.
+
 - Visit My Heroku App URL Here: [Heroku App](https://cherry-pie-58273.herokuapp.com/login)
 - Raw URL: [https://cherry-pie-58273.herokuapp.com/login]
 
