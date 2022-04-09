@@ -138,13 +138,19 @@ def index():
         spotify_data, liked_songs_vector, not_liked_songs_features
     )
     current_track = flask.session.get("track_id")
-    print(f'current track is {current_track}')
     track_info = get_track_info(current_track)
-    print(f'track info: {track_info}')
+    track_name, track_link, artist, artist_link, album, album_link, album_pic = track_info
 
     return flask.render_template(
         "main.html",
         track_id=flask.session.get("track_id"),
+        track_name = track_name,
+        track_link = track_link,
+        artist = artist,
+        artist_link = artist_link,
+        album = album,
+        album_link = album_link,
+        album_pic = album_pic,
     )
 
 
