@@ -29,3 +29,29 @@ audio {
 }
 
 
+.bgimg{
+  background-image: url(https://s.rfi.fr/media/display/dbb49488-15d8-11ea-aa65-005056a964fe/w:1280/p:16x9/worldmusicistock-508586144.jpg);
+}
+.box_textshadow {
+  text-shadow: 5px 5px 5px #FFFFFF; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+}
+p {
+  color: white;
+  font-size: 20px;
+  text-shadow:
+      0.07em 0 black,
+      0 0.07em black,
+      -0.07em 0 black,
+      0 -0.07em black;
+}
+p.with-eight {
+  text-shadow:
+      0.05em 0 black,
+      0 0.05em black,
+      -0.05em 0 black,
+      0 -0.05em black,
+      -0.05em -0.05em black,
+      -0.05em 0.05em black,
+      0.05em -0.05em black,
+      0.05em 0.05em black;
+}
