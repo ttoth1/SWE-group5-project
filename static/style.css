@@ -147,6 +147,7 @@ a {
   top: 250px;
 }
 
+<<<<<<< HEAD
 #next {
   position: relative;
   right: 300px;
@@ -162,6 +163,17 @@ a {
 
 .bgimg {
   background-image: url(https://s.rfi.fr/media/display/dbb49488-15d8-11ea-aa65-005056a964fe/w:1280/p:16x9/worldmusicistock-508586144.jpg);
+=======
+.inline {
+  display:inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.bgimg{
+  background-image: linear-gradient(to right, rgba(255,255,255, 0.3) 0 100%), url(https://s.rfi.fr/media/display/dbb49488-15d8-11ea-aa65-005056a964fe/w:1280/p:16x9/worldmusicistock-508586144.jpg);
+  background-size: cover;
+>>>>>>> fe65431b68340cf2524c3c730db362d6532af0c3
 }
 
 .box_textshadow {
