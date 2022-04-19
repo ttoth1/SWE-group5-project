@@ -1,0 +1,124 @@
+body {
+    background-color: FEFEFE;
+    text-align: center;
+    margin-top: 100px;
+}
+
+button {
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+iframe {
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+}
+
+ul {
+    list-style: none;
+    font-size: 15px;
+    color: black;
+
+}
+
+img {
+    vertical-align: middle;
+    width: 640px;
+    height: 500px;
+    border-radius: 10px;
+
+}
+
+.line {
+    width: 100%;
+    height: 10px;
+    background-color: black;
+}
+
+.LikeNext {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 150px;
+}
+
+.SkipButton {
+    border-radius: 4px;
+    background-color: #272727;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.SkipButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.SkipButton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.SkipButton:hover span {
+    padding-right: 25px;
+}
+
+.SkipButton:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.LikeButton {
+    border-radius: 4px;
+    background-color: #272727;
+    border: 2px solid black;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.LikeButton:hover {
+    background-color: red;
+    color: white;
+}
+
+#like {
+    position: relative;
+    left: 300px;
+    top: 250px;
+}
+
+#next {
+    position: relative;
+    right: 300px;
+    top: 250px;
+}
+
+#profile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 25px;
+}
