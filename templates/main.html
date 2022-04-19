@@ -5,18 +5,22 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Playfair+Display" />
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 
 <body>
-	<div id="profile">
+	<div class="profile">
 		<form method="POST" action="/user_profile">
-			<button class="w3-btn w3-xlarge" name="User Profile"><i style='font-size:24px'
-					class='fas'>&#xf406;</i></button>
+			<button style="font-size:50px" class="btn" name="User Profile"><i class="fa fa-home"></i></button>
 		</form>
-		<a href="/spotify_login">Login with Spotify!</a>
-		<br>
-		<a href="/logout">Log out</a>
+		<a href="/spotify_login" target="tab">
+			<button style="font-size:50px" class="btn"><i class="fa fa-spotify"></i></button>
+		</a>
+		<a href="/logout">
+			<button style="font-size:50px" class="btn"><i class="fa fa-sign-out"></i></button>
+		</a>
+		<h1 id="appname">SpotTok</h1>
 	</div>
 	<hr class=line />
 	<div class="LikeNext">
@@ -30,7 +34,7 @@
 			</form>
 		</div>
 	</div>
-	<div class="container">
+	<div>
 		<ul id="songinfo">
 			<li>Song:
 				<a href="{{track_link}}">{{track_name}}</a>
