@@ -1,0 +1,42 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href={{ url_for('static', filename='style.css' ) }} />
+</head>
+
+<body class="bgimg">
+	<div style="position:absolute; left:10px;">
+		<a href={{ url_for('landing') }}>
+			<button>Go back</button>
+		</a>
+	</div>
+	<div class="container" style="position: relative; top: 50px;">
+		<p class="with-eight" style="font-size:xx-large;">
+			About us
+		</p>
+	</div>
+	<div class="container" style="position: relative; top: 50px;">
+		<p class="with-eight">
+			This is a class project for Software Engineering at Georgia State University. We utilize
+			the Spotify API as well as Flask for the python backend. SQLAlchemy and PostgreSQL are
+			used for storing the database and Heroku is used for hosting our site.
+		</p>
+	</div>
+	<br>
+	<div style="position:relative; top:50px;">
+		<a href=https://github.com/ttoth1/SWE-group5-project>
+			<button>Check out this project on github!</button>
+		</a>
+	</div>
+	<div style="position:relative; top:100px;">
+		<p class="with-eight">
+			Group member github profiles
+		</p>
+		<button onclick="location.href='https://github.com/ttoth1'" type="button">Trevor Toth</button>
+		<button onclick="location.href='https://github.com/ReedMcKy'" type="button">Reed McKinney</button>
+		<button onclick="location.href='https://github.com/mhabeeb01'" type="button">Mohammed Habeeb</button>
+		<button onclick="location.href='https://github.com/psialapezo1'" type="button">Parfait Siala Pezo</button>
+	</div>
+</body>
+
+</html>
