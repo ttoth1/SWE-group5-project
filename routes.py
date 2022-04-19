@@ -104,7 +104,7 @@ def add_liked_song():
 def landing():
     if current_user.is_authenticated:
         return flask.redirect("index")
-    return flask.redirect("login")
+    return flask.render_template("landing.html")
 
 
 @app.route("/logout")
