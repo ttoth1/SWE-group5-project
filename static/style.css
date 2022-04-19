@@ -1,31 +1,153 @@
 body {
-  background-color: lightblue;
+  background-color: #4F4E4E;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  margin-top: 20px;
+  cursor: pointer;
 }
 
 img {
-  border-radius: 25px;
+  vertical-align: middle;
+  width: 640px;
+  height: 500px;
+  border-radius: 10px;
+
 }
 
 audio {
   padding-bottom: 30px;
 }
 
+iframe {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+}
+
+ul {
+  list-style: none;
+  font-size: 25px;
+  color: white;
+
+}
+
+a {
+  color: inherit;
+}
+
+.btn {
+  display: inline-block;
+}
+
 .feedback {
   margin: 0 auto;
 }
 
-.container{
+.container {
   margin: auto;
   width: 50%;
   border: 3px springgreen;
   padding: 10px;
-  
-  
-}
-.background{
-  color:rgb(6, 107, 85) ;
 }
 
+.background {
+  color: rgb(6, 107, 85);
+}
 
+.songcontent {
+  display: flex;
+
+}
+
+.interact {
+  display: flex;
+  justify-content: space-between;
+}
+
+.LikeNext {
+  display: flex;
+  justify-content: space-between;
+}
+
+.SkipButton {
+  border-radius: 4px;
+  background-color: #272727;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.SkipButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.SkipButton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.SkipButton:hover span {
+  padding-right: 25px;
+}
+
+.SkipButton:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.LikeButton {
+  border-radius: 4px;
+  background-color: #272727;
+  border: 2px solid black;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.LikeButton:hover {
+  background-color: red;
+  color: white;
+}
+
+#like {
+  position: relative;
+  left: 300px;
+  top: 250px;
+}
+
+#next {
+  position: relative;
+  right: 300px;
+  top: 250px;
+}
+
+#profile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 25px;
+}

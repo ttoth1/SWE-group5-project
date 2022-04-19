@@ -2,42 +2,51 @@
 
 <head>
 	<link rel="stylesheet" href={{ url_for('static', filename='style.css' ) }} />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-	<a href="/logout">Log out</a>
 	<br>
-	<form method="POST" action="/user_profile">
-		<button name="User Profile">See my Profile!</button>
-	</form>
-	<a href="/spotify_login">Login with Spotify!</a>
-	<h1>Music Recommendations</h1>
-	<h1>Song:
-		<a href="{{track_link}}">{{track_name}}</a>
-	</h1>
-	<h2>Artist:
-		<a href="{{artist_link}}">{{artist}}</a>
-	</h2>
-	<h3>Album:
-		<a href="{{album_link}}">{{album}}</a>
-	</h3>
-	<div>
-		<img src="{{album_pic}}" />
+	<div id="profile">
+		<form method="POST" action="/user_profile">
+			<button class="w3-btn w3-xlarge" name="User Profile">See my Profile!<i
+					class="w3-margin-left fa fa-home"></i></button>
+		</form>
+		<a href="/spotify_login">Login with Spotify!</a>
+		<br>
+		<a href="/logout">Log out</a>
 	</div>
-	<br>
-	<div>
+	<div class="container">
+		<ul id="songinfo">
+			<li>Song:
+				<a href="{{track_link}}">{{track_name}}</a>
+			</li>
+			<li>Artist:
+				<a href="{{artist_link}}">{{artist}}</a>
+			</li>
+			<li>Album:
+				<a href="{{album_link}}">{{album}}</a>
+			</li>
+		</ul>
+	</div>
+	<div class="LikeNext">
 		<form method="GET" action="{{url_for('add_liked_song')}}">
-			<button> Like This Song! </button>
+			<button class="LikeButton" id="like"> Like </button>
 		</form>
+		<img src="{{album_pic}}" />
+		<div id="next">
+			<form method="GET" action="{{url_for('index')}}">
+				<button class="SkipButton"><span>Next Song</span></button>
+			</form>
+		</div>
 	</div>
+
 	<div>
-		<form method="GET" action="{{url_for('index')}}">
-			<button> Next Song </button>
-		</form>
-	</div>
-	<div>
-		<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/{{track_id}}?utm_source=generator"
-			width="100%" height="380" frameBorder="0" allowfullscreen=""
+		<iframe style="border-radius:0"
+			src="https://open.spotify.com/embed/track/{{track_id}}?utm_source=generator&theme=0&autoplay=0"
+			frameBorder="0" allowfullscreen=""
 			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
 		</iframe>
 	</div>
