@@ -1,6 +1,7 @@
 body {
-  background-color: #4F4E4E;
+  background-color: FEFEFE;
   text-align: center;
+  margin-top: 100px;
 }
 
 button {
@@ -31,13 +32,19 @@ iframe {
 
 ul {
   list-style: none;
-  font-size: 25px;
-  color: white;
+  font-size: 15px;
+  color: black;
 
 }
 
 a {
   color: inherit;
+}
+
+.line {
+  width: 100%;
+  height: 10px;
+  background-color: black;
 }
 
 .btn {
@@ -72,6 +79,7 @@ a {
 .LikeNext {
   display: flex;
   justify-content: space-between;
+  margin-top: 150px;
 }
 
 .SkipButton {

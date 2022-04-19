@@ -5,18 +5,30 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 
 <body>
-	<br>
 	<div id="profile">
 		<form method="POST" action="/user_profile">
-			<button class="w3-btn w3-xlarge" name="User Profile">See my Profile!<i
-					class="w3-margin-left fa fa-home"></i></button>
+			<button class="w3-btn w3-xlarge" name="User Profile"><i style='font-size:24px'
+					class='fas'>&#xf406;</i></button>
 		</form>
 		<a href="/spotify_login">Login with Spotify!</a>
 		<br>
 		<a href="/logout">Log out</a>
+	</div>
+	<hr class=line />
+	<div class="LikeNext">
+		<form method="GET" action="{{url_for('add_liked_song')}}">
+			<button class="LikeButton" id="like"> Like </button>
+		</form>
+		<img src="{{album_pic}}" />
+		<div id="next">
+			<form method="GET" action="{{url_for('index')}}">
+				<button class="SkipButton"><span>Next Song</span></button>
+			</form>
+		</div>
 	</div>
 	<div class="container">
 		<ul id="songinfo">
@@ -31,18 +43,6 @@
 			</li>
 		</ul>
 	</div>
-	<div class="LikeNext">
-		<form method="GET" action="{{url_for('add_liked_song')}}">
-			<button class="LikeButton" id="like"> Like </button>
-		</form>
-		<img src="{{album_pic}}" />
-		<div id="next">
-			<form method="GET" action="{{url_for('index')}}">
-				<button class="SkipButton"><span>Next Song</span></button>
-			</form>
-		</div>
-	</div>
-
 	<div>
 		<iframe style="border-radius:0"
 			src="https://open.spotify.com/embed/track/{{track_id}}?utm_source=generator&theme=0&autoplay=0"
