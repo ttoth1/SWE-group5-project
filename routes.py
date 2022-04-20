@@ -94,7 +94,6 @@ def login_post():
 @app.route("/add_liked_song")
 def add_liked_song():
     song = flask.session.get("track_id")
-    print(song)
     new_liked_song = Liked_Songs(username=current_user.username, track_id=song)
     db.session.add(new_liked_song)
     db.session.commit()
@@ -109,17 +108,12 @@ def get_liked_songs():
     email = current_user.email
     liked_songs = []
     liked_song_query = db.session.query(Liked_Songs.track_id).filter_by(username = username)
-    #print(liked_song_query)
     if liked_song_query:
         for song_id in liked_song_query:
-            #liked_songs.append(str(song_id[0]))
-            print(str(song_id[0]))
             track_info = get_track_info(str(song_id[0]))
-            print(track_info[0])
             track_name, track_link, artist, artist_link, album, album_link, album_pic = track_info
             temp = [track_name, track_link, artist, artist_link, album, album_link, album_pic]
             liked_songs.append(temp)
-        print((liked_songs))
         return flask.render_template("user_liked_songs.html",liked_songs = liked_songs, num_songs = len(liked_songs))
     flask.flash("Error: No liked songs!")
     return flask.render_template("user_profile.html",firstname=firstname, lastname=lastname, email=email)
