@@ -1,21 +1,37 @@
 <html>
-    <head>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <b class = "flashed_message">{{message}}</b>
-                {% endfor %}
-            {% endif %}
-            {% endwith %}
-    </head>
-    <body>
+
+<head>
+    <link rel="stylesheet" href={{ url_for('static', filename='login.css' ) }} />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Playfair+Display" />
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <b class="flashed_message">{{message}}</b>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</head>
+
+<body>
+    <div class="title">
         <h1>Log In</h1>
+        <hr class=line />
+    </div>
+    <div class="container">
         <form method="POST" action="/login">
-            <input type="text" name="username" placeholder="Your Username">
-            <input type="password" name="password" placeholder="Your password">
+            <label for="uname">Username:</label>
+            <input id="uname" type="text" name="username" autofocus="">
+
+            <label for="pword">Password:</label>
+            <input id="pword" type="password" name="password" autofocus="">
+
             <input type="submit" value="Submit">
         </form>
-        <a href={{ url_for('signup') }}>Sign Up</a>
-    </body>
-</html>
 
+        <form action="/signup">
+            <button>Sign Up</button>
+        </form>
+    </div>
+</body>
+
+</html>
