@@ -91,6 +91,11 @@ def login_post():
     return flask.render_template("login.html")
 
 
+@app.route("/about_us")
+def about_us():
+    return flask.render_template("about_us.html")
+
+
 @app.route("/add_liked_song")
 def add_liked_song():
     song = flask.session.get("track_id")
@@ -104,7 +109,7 @@ def add_liked_song():
 def landing():
     if current_user.is_authenticated:
         return flask.redirect("index")
-    return flask.redirect("login")
+    return flask.render_template("landing.html")
 
 
 @app.route("/logout")
