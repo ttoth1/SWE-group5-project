@@ -105,6 +105,26 @@ def add_liked_song():
     return flask.redirect("/index")
 
 
+@app.route("/get_liked_songs", methods=["POST"])
+def get_liked_songs():
+    username = current_user.username
+    firstname = current_user.firstname
+    lastname = current_user.lastname
+    email = current_user.email
+    liked_songs = []
+    liked_song_query = db.session.query(Liked_Songs.track_id).filter_by(username = username)
+    if liked_song_query:
+        for song_id in liked_song_query:
+            track_info = get_track_info(str(song_id[0]))
+            track_name, track_link, artist, artist_link, album, album_link, album_pic = track_info
+            temp = [track_name, track_link, artist, artist_link, album, album_link, album_pic]
+            liked_songs.append(temp)
+        return flask.render_template("user_liked_songs.html",liked_songs = liked_songs, num_songs = len(liked_songs))
+    flask.flash("Error: No liked songs!")
+    return flask.render_template("user_profile.html",firstname=firstname, lastname=lastname, email=email)
+    
+
+
 @app.route("/")
 def landing():
     if current_user.is_authenticated:
@@ -126,7 +146,6 @@ def user_profle():
     return flask.render_template(
         "user_profile.html", firstname=firstname, lastname=lastname, email=email
     )
-
 
 # spotify_features_df, spotify_data = load_spotify_features()
 @app.route("/index")
