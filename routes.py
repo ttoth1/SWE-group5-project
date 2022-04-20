@@ -7,7 +7,7 @@ import base64
 import flask
 from flask_login import login_user, current_user, LoginManager, logout_user
 from flask_login.utils import login_required
-from models import Liked_Songs, User_Table
+from models import Liked_Songs, Skipped_Songs, User_Table
 from app import app, db
 from functions import encrypt_password
 from spotify_model import (
@@ -105,6 +105,15 @@ def add_liked_song():
     return flask.redirect("/index")
 
 
+@app.route("/add_skipped_song")
+def add_skipped_song():
+    song = flask.session.get("track_id")
+    new_skipped_song = Skipped_Songs(username=current_user.username, track_id=song)
+    db.session.add(new_skipped_song)
+    db.session.commit()
+    return flask.redirect("/index")
+
+
 @app.route("/get_liked_songs", methods=["POST"])
 def get_liked_songs():
     username = current_user.username
@@ -112,17 +121,38 @@ def get_liked_songs():
     lastname = current_user.lastname
     email = current_user.email
     liked_songs = []
-    liked_song_query = db.session.query(Liked_Songs.track_id).filter_by(username = username)
+    liked_song_query = db.session.query(Liked_Songs.track_id).filter_by(
+        username=username
+    )
     if liked_song_query:
         for song_id in liked_song_query:
             track_info = get_track_info(str(song_id[0]))
-            track_name, track_link, artist, artist_link, album, album_link, album_pic = track_info
-            temp = [track_name, track_link, artist, artist_link, album, album_link, album_pic]
+            (
+                track_name,
+                track_link,
+                artist,
+                artist_link,
+                album,
+                album_link,
+                album_pic,
+            ) = track_info
+            temp = [
+                track_name,
+                track_link,
+                artist,
+                artist_link,
+                album,
+                album_link,
+                album_pic,
+            ]
             liked_songs.append(temp)
-        return flask.render_template("user_liked_songs.html",liked_songs = liked_songs, num_songs = len(liked_songs))
+        return flask.render_template(
+            "user_liked_songs.html", liked_songs=liked_songs, num_songs=len(liked_songs)
+        )
     flask.flash("Error: No liked songs!")
-    return flask.render_template("user_profile.html",firstname=firstname, lastname=lastname, email=email)
-    
+    return flask.render_template(
+        "user_profile.html", firstname=firstname, lastname=lastname, email=email
+    )
 
 
 @app.route("/")
@@ -147,34 +177,52 @@ def user_profle():
         "user_profile.html", firstname=firstname, lastname=lastname, email=email
     )
 
-# spotify_features_df, spotify_data = load_spotify_features()
+
 @app.route("/index")
 @login_required
 def index():
     liked_song_list = []
+    skipped_song_list = []
+
     liked_song_query = Liked_Songs.query.filter_by(username=current_user.username).all()
-    for track_id in liked_song_query:
-        liked_song_list.append(track_id)
+    for track in liked_song_query:
+        liked_song_list.append(track.track_id)
+
+    skipped_song_query = Skipped_Songs.query.filter_by(
+        username=current_user.username
+    ).all()
+
+    for track in skipped_song_query:
+        skipped_song_list.append(track.track_id)
+
     liked_songs_vector, not_liked_songs_features = generate_playlist_feature(
-        spotify_features_df, liked_song_list
+        spotify_features_df, liked_song_list, skipped_song_list
     )
     flask.session["track_id"] = generate_playlist_recommendations(
         spotify_data, liked_songs_vector, not_liked_songs_features
     )
     current_track = flask.session.get("track_id")
     track_info = get_track_info(current_track)
-    track_name, track_link, artist, artist_link, album, album_link, album_pic = track_info
+    (
+        track_name,
+        track_link,
+        artist,
+        artist_link,
+        album,
+        album_link,
+        album_pic,
+    ) = track_info
 
     return flask.render_template(
         "main.html",
         track_id=flask.session.get("track_id"),
-        track_name = track_name,
-        track_link = track_link,
-        artist = artist,
-        artist_link = artist_link,
-        album = album,
-        album_link = album_link,
-        album_pic = album_pic,
+        track_name=track_name,
+        track_link=track_link,
+        artist=artist,
+        artist_link=artist_link,
+        album=album,
+        album_link=album_link,
+        album_pic=album_pic,
     )
 
 

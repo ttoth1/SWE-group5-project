@@ -11,6 +11,14 @@ class Liked_Songs(db.Model):
     track_id = db.Column(db.String(80))
 
 
+class Skipped_Songs(db.Model):
+    """Table to store track id's for a user's skipped songs"""
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80))
+    track_id = db.Column(db.String(80))
+
+
 class User_Table(db.Model, UserMixin):
     """Table to store a user's login information"""
 
