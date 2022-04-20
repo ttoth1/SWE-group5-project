@@ -11,7 +11,7 @@
 <body>
 	<div class="profile">
 		<form method="POST" action="/user_profile">
-			<button style="font-size:50px" class="btn" name="User Profile"><i class="fa fa-home"></i></button>
+			<button style="font-size:50px" class="btn" name="User Profile"><i class="fa fa-user-circle-o" aria-hidden="true"></i></button>
 		</form>
 		<a href="/spotify_login" target="tab">
 			<button style="font-size:50px" class="btn"><i class="fa fa-spotify"></i></button>
@@ -24,12 +24,12 @@
 	<hr class=line />
 	<div class="LikeNext">
 		<form method="GET" action="{{url_for('add_liked_song')}}">
-			<button class="LikeButton"> Like </button>
+			<button class="LikeButton"> Like <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
 		</form>
 		<img src="{{album_pic}}" />
 		<div>
 			<form method="GET" action="{{url_for('add_skipped_song')}}">
-				<button class="SkipButton"><span>Next</span></button>
+				<button class="SkipButton"><span>Skip</span></button>
 			</form>
 		</div>
 	</div>
@@ -53,6 +53,13 @@
 			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
 		</iframe>
 	</div>
+	<br>
+	<br>
+	<br>
+	<br>
 </body>
+<footer>
+	
+</footer>
 
 </html>

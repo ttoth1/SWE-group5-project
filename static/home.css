@@ -1,6 +1,6 @@
 body {
     background-color: FEFEFE;
-
+    overflow: auto;
 }
 
 a {
@@ -26,11 +26,7 @@ ul {
 }
 
 img {
-
-    width: 640px;
-    height: 500px;
     border-radius: 10px;
-
 }
 
 .btn {
@@ -62,7 +58,6 @@ img {
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-evenly;
     align-items: center;
-    margin-top: 75px;
 }
 
 .SkipButton {
@@ -96,6 +91,9 @@ img {
     opacity: 1;
     right: 0;
 }
+.SkipButton:hover {
+    background-color: darkgray;
+}
 
 .LikeButton {
     border-radius: 4px;
@@ -111,7 +109,7 @@ img {
 }
 
 .LikeButton:hover {
-    background-color: red;
+    background-color: green;
     color: white;
 }
 
