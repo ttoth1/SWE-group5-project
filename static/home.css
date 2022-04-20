@@ -54,11 +54,14 @@ img {
     width: 100%;
     height: 10px;
     background-color: black;
+
 }
 
 .LikeNext {
     display: flex;
-    justify-content: space-between;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-evenly;
+    align-items: center;
     margin-top: 75px;
 }
 
@@ -69,26 +72,19 @@ img {
     color: #FFFFFF;
     text-align: center;
     font-size: 28px;
-    padding: 20px;
     width: 200px;
     transition: all 0.5s;
     cursor: pointer;
-    margin: 5px;
 }
 
 .SkipButton span {
     cursor: pointer;
-    display: inline-block;
-    position: relative;
     transition: 0.5s;
 }
 
 .SkipButton span:after {
     content: '\00bb';
-    position: absolute;
     opacity: 0;
-    top: 0;
-    right: -20px;
     transition: 0.5s;
 }
 
@@ -109,11 +105,9 @@ img {
     color: #FFFFFF;
     text-align: center;
     font-size: 28px;
-    padding: 20px;
     width: 200px;
     transition: all 0.5s;
     cursor: pointer;
-    margin: 5px;
 }
 
 .LikeButton:hover {
@@ -125,17 +119,9 @@ img {
     height: 10px;
 }
 
-#like {
-    position: relative;
-    left: 300px;
-    top: 250px;
-}
 
-#next {
-    position: relative;
-    right: 300px;
-    top: 250px;
-}
+
+
 
 #appname {
     font-family: Playfair Display;

@@ -198,9 +198,12 @@ def index():
     liked_songs_vector, not_liked_songs_features = generate_playlist_feature(
         spotify_features_df, liked_song_list, skipped_song_list
     )
-    flask.session["track_id"] = generate_playlist_recommendations(
-        spotify_data, liked_songs_vector, not_liked_songs_features
-    )
+    if not liked_song_list and not skipped_song_list:
+        flask.session["track_id"] = "7GhIk7Il098yCjg4BQjzvb"
+    else:
+        flask.session["track_id"] = generate_playlist_recommendations(
+            spotify_data, liked_songs_vector, not_liked_songs_features
+        )
     current_track = flask.session.get("track_id")
     track_info = get_track_info(current_track)
     (
