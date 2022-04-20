@@ -1,9 +1,21 @@
 <link rel="stylesheet" href="/static/style.css" />
 <head>
+  {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          {% for message in messages %}
+              <b class = "flashed_message">{{message}}</b>
+          {% endfor %}
+      {% endif %}
+      {% endwith %}
+</head>
+<head>
   <a href="/index">Back to Home</a>
   <meta charset="UTF-8">
   <title>User Profile</title>
 </head>
+<form method="POST" action="/get_liked_songs">
+  <button name="See my liked songs">Liked Songs</button>
+</form>
 <body>
   <div class = "container">
     <div class = "left">
