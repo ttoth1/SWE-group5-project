@@ -1,23 +1,46 @@
 <html>
-    <head>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <b class = "flashed_message">{{message}}</b>
-                {% endfor %}
-            {% endif %}
-            {% endwith %}
-    </head>
-    <body>
-        <h1>Sign up!</h1>
+
+<head>
+
+    <link rel="stylesheet" href={{ url_for('static', filename='signup.css' ) }} />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Playfair+Display" />
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <b class="flashed_message">{{message}}</b>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</head>
+
+<body>
+    <div class="title">
+        <h1>Join SpotTok!</h1>
+        <hr class=line />
+    </div>
+    <div class="container">
         <form method="POST" action="/signup">
-            <input class="input is-large" type="text" name="firstname" placeholder="Your First Name" autofocus="">
-            <input class="input is-large" type="text" name="lastname" placeholder="Your Last Name" autofocus="">
-            <input class="input is-large" type="text" name="username" placeholder="Your Username" autofocus="">
-            <input class="input is-large" type="text" name="email" placeholder="Your Email" autofocus="">
-            <input class="input is-large" type="password" name="password" placeholder="Your Password" autofocus="">
+            <label for="fname">First Name:</label>
+            <input id="fname" type="text" name="firstname" autofocus="">
+
+            <label for="lname">Last Name:</label>
+            <input id="lname" type="text" name="lastname" autofocus="">
+
+            <label for="uname">Username:</label>
+            <input id="uname" type="text" name="username" autofocus="">
+
+            <label for="email">Email:</label>
+            <input id="email" type="text" name="email" autofocus="">
+
+            <label for="pword">Password:</label>
+            <input id="pword" type="password" name="password" autofocus="">
+
             <input type="submit" value="Submit">
         </form>
-        <a href={{ url_for('login') }}>Log In</a>
-    </body>
+        <form action="/login">
+            <button>Back To Login</button>
+        </form>
+    </div>
+</body>
+
 </html>
