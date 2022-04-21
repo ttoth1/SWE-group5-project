@@ -1,21 +1,9 @@
 <link rel="stylesheet" href="/static/style.css" />
 <head>
-  {% with messages = get_flashed_messages() %}
-      {% if messages %}
-          {% for message in messages %}
-              <b class = "flashed_message">{{message}}</b>
-          {% endfor %}
-      {% endif %}
-      {% endwith %}
-</head>
-<head>
   <a href="/index">Back to Home</a>
   <meta charset="UTF-8">
   <title>User Profile</title>
 </head>
-<form method="POST" action="/get_liked_songs">
-  <button name="See my liked songs">Liked Songs</button>
-</form>
 <body>
   <div class = "container">
     <div class = "left">
@@ -34,4 +22,16 @@
       </div>
   </div> 
 </div> 
+<h2>My Liked Songs:</h2>
+{% for i in range(num_songs) %}
+<div class = mini_container>
+    <p>----------------------------</p>
+    <p>Title: 
+      <a href="{{liked_songs[i][1]}}">{{liked_songs[i][0]}}</a></p>
+      <p>Artist:
+        <a href="{{liked_songs[i][3]}}">{{liked_songs[i][2]}}</a></p>
+        <p>Album: 
+          <a href="{{liked_songs[i][5]}}">{{liked_songs[i][4]}}</a></p>  
+</div>    
+{% endfor %}
 </body>
