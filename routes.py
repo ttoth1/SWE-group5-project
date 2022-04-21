@@ -165,7 +165,7 @@ def landing():
 @app.route("/logout")
 def logout():
     logout_user()
-    return flask.redirect("login")
+    return flask.redirect(flask.url_for("landing"))
 
 
 @app.route("/user_profile", methods=["POST"])
@@ -176,6 +176,7 @@ def user_profle():
     return flask.render_template(
         "user_profile.html", firstname=firstname, lastname=lastname, email=email
     )
+
 
 @app.route("/index")
 @login_required
