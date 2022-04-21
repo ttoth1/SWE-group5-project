@@ -39,12 +39,12 @@ a {
 }
 
 .bgimg {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.3) 0 100%), url(https://s.rfi.fr/media/display/dbb49488-15d8-11ea-aa65-005056a964fe/w:1280/p:16x9/worldmusicistock-508586144.jpg);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0 100%), url(https://cdn.discordapp.com/attachments/956294030227042304/966514337676156988/unknown.png);
   background-size: cover;
 }
 
 .box_textshadow {
-  text-shadow: 5px 5px 5px #FFFFFF;
+  text-shadow: 5px 5px 5px #2d1d1d;
   /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
 }
 
@@ -74,7 +74,7 @@ p.with-eight {
 button {
   min-width: 10%;
   max-width: fit-content;
-  background-color: #000000;
+  background-color: #111;
   color: white;
   padding: 8px 10px;
   margin: 8px 0;
