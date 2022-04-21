@@ -4,7 +4,6 @@
 	<link rel="stylesheet" href={{ url_for('static', filename='home.css' ) }} />
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Playfair+Display" />
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
@@ -12,7 +11,7 @@
 <body>
 	<div class="profile">
 		<form method="POST" action="/user_profile">
-			<button style="font-size:50px" class="btn" name="User Profile"><i class="fa fa-home"></i></button>
+			<button style="font-size:50px" class="btn" name="User Profile"><i class="fa fa-user-circle-o" aria-hidden="true"></i></button>
 		</form>
 		<a href="/spotify_login" target="tab">
 			<button style="font-size:50px" class="btn"><i class="fa fa-spotify"></i></button>
@@ -25,25 +24,25 @@
 	<hr class=line />
 	<div class="LikeNext">
 		<form method="GET" action="{{url_for('add_liked_song')}}">
-			<button class="LikeButton" id="like"> Like </button>
+			<button class="LikeButton"> Like <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
 		</form>
 		<img src="{{album_pic}}" />
-		<div id="next">
-			<form method="GET" action="{{url_for('index')}}">
-				<button class="SkipButton"><span>Next Song</span></button>
+		<div>
+			<form method="GET" action="{{url_for('add_skipped_song')}}">
+				<button class="SkipButton"><span>Skip</span></button>
 			</form>
 		</div>
 	</div>
 	<div>
 		<ul id="songinfo">
 			<li>Song:
-				<a href="{{track_link}}">{{track_name}}</a>
+				<a href="{{track_link}}" target="tab"><u>{{track_name}}</u></a>
 			</li>
 			<li>Artist:
-				<a href="{{artist_link}}">{{artist}}</a>
+				<a href="{{artist_link}}" target="tab"><u>{{artist}}</u></a>
 			</li>
 			<li>Album:
-				<a href="{{album_link}}">{{album}}</a>
+				<a href="{{album_link}}" target="tab"><u>{{album}}</u></a>
 			</li>
 		</ul>
 	</div>
@@ -54,6 +53,13 @@
 			allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
 		</iframe>
 	</div>
+	<br>
+	<br>
+	<br>
+	<br>
 </body>
+<footer>
+	
+</footer>
 
 </html>

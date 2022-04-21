@@ -71,7 +71,9 @@ def load_spotify_features():
     return spotify_features_df, spotify_data
 
 
-def generate_playlist_feature(feature_set: pd.DataFrame, liked_songs: list):
+def generate_playlist_feature(
+    feature_set: pd.DataFrame, liked_songs: list, skipped_songs: list
+):
     """
     This function takes in the feature set and liked songs then
     returns a series representing the features of the liked songs
@@ -79,7 +81,10 @@ def generate_playlist_feature(feature_set: pd.DataFrame, liked_songs: list):
     """
 
     liked_songs_features = feature_set[feature_set["track_id"].isin(liked_songs)]
-    not_liked_songs_features = feature_set[~feature_set["track_id"].isin(liked_songs)]
+    not_liked_songs_features = feature_set[
+        (~feature_set["track_id"].isin(liked_songs))
+        & (~feature_set["track_id"].isin(skipped_songs))
+    ]
     liked_songs_features_final = liked_songs_features.drop(columns="track_id")
     return (
         liked_songs_features_final.sum(axis=0),
@@ -103,12 +108,12 @@ def generate_playlist_recommendations(
         nonplaylist_features.drop("track_id", axis=1).values,
         features.values.reshape(1, -1),
     )[:, 0].copy()
-    non_playlist_df_top = non_playlist_df.sort_values("sim", ascending=False).head(5)
-    non_playlist_df_middle = non_playlist_df.sort_values("sim", ascending=False).sample(
-        3
+    non_playlist_df_top = non_playlist_df.sort_values("sim", ascending=False).head(15)
+    non_playlist_df_random = non_playlist_df.sort_values("sim", ascending=False).sample(
+        2
     )
-    non_playlist_df_bottom = non_playlist_df.sort_values("sim", ascending=False).tail(3)
+    non_playlist_df_bottom = non_playlist_df.sort_values("sim", ascending=False).tail(1)
     recommendations = pd.concat(
-        [non_playlist_df_top, non_playlist_df_middle, non_playlist_df_bottom]
+        [non_playlist_df_top, non_playlist_df_random, non_playlist_df_bottom]
     )
     return recommendations.sample(1)["track_id"].values[0]
