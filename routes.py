@@ -117,9 +117,6 @@ def add_skipped_song():
 @app.route("/get_liked_songs", methods=["POST"])
 def get_liked_songs():
     username = current_user.username
-    firstname = current_user.firstname
-    lastname = current_user.lastname
-    email = current_user.email
     liked_songs = []
     liked_song_query = db.session.query(Liked_Songs.track_id).filter_by(
         username=username
@@ -146,13 +143,9 @@ def get_liked_songs():
                 album_pic,
             ]
             liked_songs.append(temp)
-        return flask.render_template(
-            "user_liked_songs.html", liked_songs=liked_songs, num_songs=len(liked_songs)
-        )
-    flask.flash("Error: No liked songs!")
-    return flask.render_template(
-        "user_profile.html", firstname=firstname, lastname=lastname, email=email
-    )
+        
+    return liked_songs
+
 
 
 @app.route("/")
@@ -173,8 +166,9 @@ def user_profle():
     firstname = current_user.firstname
     lastname = current_user.lastname
     email = current_user.email
+    liked_songs = get_liked_songs()
     return flask.render_template(
-        "user_profile.html", firstname=firstname, lastname=lastname, email=email
+        "user_profile.html", firstname=firstname, lastname=lastname, email=email, liked_songs = liked_songs, num_songs = len(liked_songs)
     )
 
 
