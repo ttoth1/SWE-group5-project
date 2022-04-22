@@ -123,7 +123,6 @@ def get_liked_songs():
     )
     if liked_song_query:
         for song_id in liked_song_query:
-            print(str(song_id[0]))
             track_info = get_track_info(str(song_id[0]))
             (
                 track_name,
