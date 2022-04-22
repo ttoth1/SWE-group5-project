@@ -52,9 +52,7 @@ class testPasswordEncryption(unittest.TestCase):
         email = 'ran@gmail.com', firstname = 'Random', lastname = 'random'), follow_redirects  = True)
         self.assertIn(b'/login', response.data)  
 
-    def test_feature_recommender(self):
-        test = generate_playlist_recommendations(0,0,0)
-        print(test)
+
 
     
         
