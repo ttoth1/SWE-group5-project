@@ -38,8 +38,16 @@ h4 {
   left: 1%;
 }
 
+button {
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
 button:hover {
-  background-color: #7c7c7c;
+  background-color: #e23b3b;
 }
 
 .title {
@@ -66,9 +74,10 @@ button:hover {
   color: rgb(6, 107, 85);
 }
 
-.btn_link{
-  font-size: 20px;
+.btn_link {
+  font-size: 30px;
 }
+
 .inline {
   display: inline-block;
   margin-left: 5px;
