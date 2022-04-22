@@ -114,6 +114,16 @@ def add_skipped_song():
     return flask.redirect("/index")
 
 
+@app.route("/remove_liked_song", methods=["POST"])
+def remove_liked_song():
+    username = current_user.username
+    track_id = flask.request.form.get("Remove")
+    Liked_Songs.query.filter_by(
+        username = username,
+        track_id = track_id
+    ).delete()
+    db.session.commit()
+    return flask.redirect("user_profile")
 @app.route("/get_liked_songs", methods=["POST"])
 def get_liked_songs():
     username = current_user.username
@@ -141,6 +151,7 @@ def get_liked_songs():
                 album,
                 album_link,
                 album_pic,
+                str(song_id[0])
             ]
             liked_songs.append(temp)
         
@@ -161,7 +172,7 @@ def logout():
     return flask.redirect(flask.url_for("landing"))
 
 
-@app.route("/user_profile", methods=["POST"])
+@app.route("/user_profile", methods=["GET","POST"])
 def user_profle():
     firstname = current_user.firstname
     lastname = current_user.lastname

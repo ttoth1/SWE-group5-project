@@ -1,3 +1,4 @@
+from importlib.resources import path
 import unittest
 from flask import url_for, request
 from functions import encrypt_password
@@ -5,6 +6,8 @@ from app import app
 import requests
 from spotify_model import load_spotify_features, generate_playlist_recommendations
 from get_track_info import get_track_info
+from unittest.mock import MagicMock, patch
+import get_track_info as test_import
 
 class testPasswordEncryption(unittest.TestCase):
     
@@ -30,6 +33,19 @@ class testPasswordEncryption(unittest.TestCase):
         track_name, track_link, artist, artist_link, album,  album_link, album_pic = get_track_info(test_track_id)
         output_arr = [track_name, track_link, artist, artist_link, album,  album_link, album_pic]
         self.assertEqual(expected_output,output_arr)
+
+    def testSpotifyMock(self):
+        mock_reponse = MagicMock()
+        mock_reponse.json.return_value = {
+            'artist': 'Allman Brothers Band'
+        }
+
+
+
+        with patch("test_import.request.get") as mock_request_get:
+            mock_request_get.return_value = mock_reponse
+
+            self.assertEqual(get_track_info("1hUe1XOcM5iXaWG6NRtLzG"),"explicit")
 
     '''Test function to make sure the login page is availble and has no errors'''
     def test_index(self):

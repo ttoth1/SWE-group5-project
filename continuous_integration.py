@@ -30,4 +30,3 @@ class testPasswordEncryption(unittest.TestCase):
         track_name, track_link, artist, artist_link, album,  album_link, album_pic = get_track_info(test_track_id)
         output_arr = [track_name, track_link, artist, artist_link, album,  album_link, album_pic]
         self.assertEqual(expected_output,output_arr)
-
