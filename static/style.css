@@ -23,7 +23,7 @@ h4 {
   font-weight: bold;
 }
 
-button {
+.return {
   width: 5%;
   background-color: #000000;
   color: white;
@@ -32,7 +32,7 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 29px;
   position: fixed;
   top: 1%;
   left: 1%;
@@ -66,7 +66,9 @@ button:hover {
   color: rgb(6, 107, 85);
 }
 
-
+.btn_link{
+  font-size: 20px;
+}
 .inline {
   display: inline-block;
   margin-left: 5px;
