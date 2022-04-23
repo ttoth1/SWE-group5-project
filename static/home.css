@@ -93,6 +93,7 @@ img {
     opacity: 1;
     right: 0;
 }
+
 .SkipButton:hover {
     background-color: darkgray;
 }
